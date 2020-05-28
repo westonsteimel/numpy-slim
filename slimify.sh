@@ -27,8 +27,9 @@ mkdir -p dist
             \*testing/\*
 
         wheel unpack $filename
-        find numpy-${NUMPY_VERSION}/numpy/ -name "*.so" | xargs strip
-        find numpy-${NUMPY_VERSION}/numpy/ -name "*.a" | xargs strip
+        find numpy-${NUMPY_VERSION}/ -name "*.so" | xargs strip
+        find numpy-${NUMPY_VERSION}/ -name "*.so.*" | xargs strip
+        find numpy-${NUMPY_VERSION}/ -name "*.a" | xargs strip
         wheel pack numpy-${NUMPY_VERSION}
 
         rm -r numpy-${NUMPY_VERSION}
