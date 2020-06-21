@@ -14,11 +14,16 @@ mkdir -p dist
     fi
 
     echo "slimming wheels for numpy version ${NUMPY_VERSION}"
-    
+
+    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.5 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
 
     for filename in ./*.whl
     do
@@ -28,7 +33,7 @@ mkdir -p dist
 
         wheel unpack $filename
         find numpy-${NUMPY_VERSION}/ -name "*.so" | xargs strip
-        find numpy-${NUMPY_VERSION}/ -name "*.so.*" | xargs strip
+        #find numpy-${NUMPY_VERSION}/ -name "*.so.*" | xargs strip
         find numpy-${NUMPY_VERSION}/ -name "*.a" | xargs strip
         wheel pack numpy-${NUMPY_VERSION}
 
