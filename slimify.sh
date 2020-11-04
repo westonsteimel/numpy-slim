@@ -15,12 +15,15 @@ mkdir -p dist
 
     echo "slimming wheels for numpy version ${NUMPY_VERSION}"
 
+    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
+    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
