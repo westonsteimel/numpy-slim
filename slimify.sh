@@ -12,7 +12,8 @@ mkdir -p dist
     cd dist
 
     if [[ -z "${NUMPY_VERSION}" ]]; then
-        NUMPY_VERSION=$(pip search numpy | pcregrep -o1 -e "^numpy \((.*)\).*$")
+        echo "Set the NUMPY_VERSION environment variable."
+        exit 1
     fi
 
     echo "slimming wheels for numpy version ${NUMPY_VERSION}"
@@ -20,15 +21,12 @@ mkdir -p dist
     $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.6 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
 
     for filename in ./*.whl
     do
