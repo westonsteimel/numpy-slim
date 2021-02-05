@@ -2,6 +2,8 @@
 
 set -e
 
+pip install -U pip==20.2.4
+
 PIP_DOWNLOAD_CMD="pip download --no-deps --disable-pip-version-check"
 
 mkdir -p dist
