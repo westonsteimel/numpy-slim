@@ -35,13 +35,14 @@ mkdir -p dist
         find numpy-${NUMPY_VERSION}/ -name "*.so" | xargs strip
         #find numpy-${NUMPY_VERSION}/ -name "*.so.*" | xargs strip
         find numpy-${NUMPY_VERSION}/ -name "*.a" | xargs strip
+        rm $filename
         wheel pack numpy-${NUMPY_VERSION}
 
         rm -r numpy-${NUMPY_VERSION}
     done
 
     pip uninstall -y --disable-pip-version-check numpy
-    pip install --disable-pip-version-check numpy -f .
+    pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2010_x86_64.manylinux_2_12_x86_64.whl"
 
     python -c "
 import importlib
