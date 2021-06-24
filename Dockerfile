@@ -10,5 +10,6 @@ RUN apt update \
 WORKDIR /build
 
 COPY slimify.sh /build/
+COPY test.py /build/
 
 CMD ["/build/slimify.sh"]

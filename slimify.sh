@@ -29,7 +29,8 @@ mkdir -p dist
     do
         zip -d ${filename} \
             \*tests/\* \
-            \*testing/\*
+            \*testing/\* \
+            \*_examples/\*
 
         wheel unpack $filename
         find numpy-${NUMPY_VERSION}/ -name "*.so" | xargs strip
@@ -43,12 +44,6 @@ mkdir -p dist
 
     pip uninstall -y --disable-pip-version-check numpy
     pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2010_x86_64.manylinux_2_12_x86_64.whl"
-
-    python -c "
-import importlib
-import numpy as np
-
-module = importlib.import_module('numpy')
-print(module.__version__)
-"
 )
+
+python test.py
