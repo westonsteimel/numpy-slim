@@ -16,14 +16,22 @@ mkdir -p dist
 
     echo "slimming wheels for numpy version ${NUMPY_VERSION}"
 
-    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
-    $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
+    if [ $TARGETPLATFORM == "linux/amd64" ]; then 
+        $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2010_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
+    elif [ $TARGETPLATFORM == "linux/aarch64" ]; then
+        $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
+        $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
+    else
+        echo "${TARGETPLATFORM} not currently supported."
+    fi
 
     for filename in ./*.whl
     do
@@ -43,7 +51,14 @@ mkdir -p dist
     done
 
     pip uninstall -y --disable-pip-version-check numpy
-    pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2010_x86_64.manylinux_2_12_x86_64.whl"
+
+    if [ $TARGETPLATFORM == "linux/amd64" ]; then
+        pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2010_x86_64.manylinux_2_12_x86_64.whl"
+    elif [ $TARGETPLATFORM == "linux/aarch64" ]; then
+        pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+    else
+        echo "${TARGETPLATFORM} not currently supported."
+    fi
 )
 
 python test.py
