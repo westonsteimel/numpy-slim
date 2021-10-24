@@ -17,6 +17,7 @@ mkdir -p dist
     echo "slimming wheels for numpy version ${NUMPY_VERSION}"
 
     if [ $TARGETPLATFORM == "linux/amd64" ]; then 
+        $PIP_DOWNLOAD_CMD --python-version 3.10 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_x86_64 numpy==${NUMPY_VERSION}
@@ -26,6 +27,7 @@ mkdir -p dist
         $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux1_x86_64 numpy==${NUMPY_VERSION}
     elif [ $TARGETPLATFORM == "linux/aarch64" ]; then
+        $PIP_DOWNLOAD_CMD --python-version 3.10 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.9 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.8 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
         $PIP_DOWNLOAD_CMD --python-version 3.7 --platform manylinux2014_aarch64 numpy==${NUMPY_VERSION}
