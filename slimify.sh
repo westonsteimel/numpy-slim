@@ -55,9 +55,9 @@ mkdir -p dist
     pip uninstall -y --disable-pip-version-check numpy
 
     if [ $TARGETPLATFORM == "linux/amd64" ]; then
-        pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2010_x86_64.manylinux_2_12_x86_64.whl"
+        pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
     elif [ $TARGETPLATFORM == "linux/aarch64" ]; then
-        pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp39-cp39-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
+        pip install --no-cache-dir --disable-pip-version-check "numpy-${NUMPY_VERSION}-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl"
     else
         echo "${TARGETPLATFORM} not currently supported."
     fi

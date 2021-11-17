@@ -1,4 +1,4 @@
-FROM ghcr.io/westonsteimel/python:3.9-slim-bookworm
+FROM ghcr.io/westonsteimel/python:3.10-slim-bookworm
 
 ARG TARGETPLATFORM
 ENV TARGETPLATFORM="${TARGETPLATFORM}"
